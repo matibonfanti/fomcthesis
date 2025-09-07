@@ -1,0 +1,96 @@
+Clip-level regression (Non-neutral vs Neutral)
+segments = s3://fomcthesiss3/analysis/segments.parquet
+returns  = s3://fomcthesiss3/analysis/seg_returns.parquet
+winsor_sigma = ±3.0
+
+
+=== pooled ===
+rows=3,528, meetings=16, winsor_sigma=3.0
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.381
+Model:                            OLS   Adj. R-squared:                  0.381
+Method:                 Least Squares   F-statistic:                     49.83
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):           4.92e-08
+Time:                        11:53:13   Log-Likelihood:                -9030.2
+No. Observations:                3528   AIC:                         1.807e+04
+Df Residuals:                    3524   BIC:                         1.809e+04
+Df Model:                           3                                         
+Covariance Type:              cluster                                         
+==================================================================================
+                     coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept          0.0522      0.059      0.879      0.380      -0.064       0.169
+C(sym)[T.ZT]      -0.1830      0.127     -1.442      0.149      -0.432       0.066
+is_non_neutral     0.3573      0.235      1.521      0.128      -0.103       0.818
+pre_px_60         -0.3071      0.031     -9.755      0.000      -0.369      -0.245
+==============================================================================
+Omnibus:                     3196.669   Durbin-Watson:                   1.842
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           720753.844
+Skew:                          -3.616   Prob(JB):                         0.00
+Kurtosis:                      72.648   Cond. No.                         53.7
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Wald test (β_nonneutral = 0): (failed: 'float' object is not subscriptable)
+
+=== ES_only ===
+rows=1,764, meetings=16, winsor_sigma=3.0
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.427
+Model:                            OLS   Adj. R-squared:                  0.426
+Method:                 Least Squares   F-statistic:                     127.1
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):           3.93e-10
+Time:                        11:53:13   Log-Likelihood:                -4813.3
+No. Observations:                1764   AIC:                             9633.
+Df Residuals:                    1761   BIC:                             9649.
+Df Model:                           2                                         
+Covariance Type:              cluster                                         
+==================================================================================
+                     coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept          0.0208      0.065      0.319      0.750      -0.107       0.149
+is_non_neutral     0.4292      0.330      1.300      0.194      -0.218       1.077
+pre_px_60         -0.3759      0.024    -15.669      0.000      -0.423      -0.329
+==============================================================================
+Omnibus:                     1262.972   Durbin-Watson:                   1.849
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           166186.093
+Skew:                          -2.473   Prob(JB):                         0.00
+Kurtosis:                      50.292   Cond. No.                         57.2
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Wald test (β_nonneutral = 0): (failed: 'float' object is not subscriptable)
+
+=== ZT_only ===
+rows=1,764, meetings=16, winsor_sigma=3.0
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.340
+Model:                            OLS   Adj. R-squared:                  0.339
+Method:                 Least Squares   F-statistic:                     14.97
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):           0.000266
+Time:                        11:53:13   Log-Likelihood:                -3933.2
+No. Observations:                1764   AIC:                             7872.
+Df Residuals:                    1761   BIC:                             7889.
+Df Model:                           2                                         
+Covariance Type:              cluster                                         
+==================================================================================
+                     coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept         -0.0987      0.097     -1.017      0.309      -0.289       0.092
+is_non_neutral     0.1012      0.097      1.043      0.297      -0.089       0.291
+pre_px_60         -0.2172      0.040     -5.472      0.000      -0.295      -0.139
+==============================================================================
+Omnibus:                     2763.929   Durbin-Watson:                   1.860
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):          1677013.877
+Skew:                          -9.606   Prob(JB):                         0.00
+Kurtosis:                     152.825   Cond. No.                         50.0
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Wald test (β_nonneutral = 0): (failed: 'float' object is not subscriptable)

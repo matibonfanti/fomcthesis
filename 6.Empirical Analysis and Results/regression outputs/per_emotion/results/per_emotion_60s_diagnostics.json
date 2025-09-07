@@ -1,0 +1,12 @@
+{
+  "inputs": {
+    "segments": "s3://fomcthesiss3/analysis/segments.parquet",
+    "returns": "s3://fomcthesiss3/analysis/seg_returns.parquet"
+  },
+  "winsor_sigma": 3.0,
+  "assets_estimated": [
+    "ES",
+    "ZT"
+  ],
+  "n_rows_total": 3528
+}

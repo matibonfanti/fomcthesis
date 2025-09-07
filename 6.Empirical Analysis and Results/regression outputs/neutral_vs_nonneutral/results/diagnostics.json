@@ -1,0 +1,9 @@
+{
+  "n_rows_input": 3528,
+  "n_rows_used": 3528,
+  "unique_meetings": 16,
+  "sym_counts": {
+    "ES": 1764,
+    "ZT": 1764
+  }
+}

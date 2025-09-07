@@ -1,0 +1,179 @@
+Disaggregated per-emotion regressions at 60s (ES & ZT; neutral baseline)
+segments = s3://fomcthesiss3/analysis/segments.parquet
+returns  = s3://fomcthesiss3/analysis/seg_returns.parquet
+winsor_sigma = ±3.0
+
+
+=== ES (60s) ===
+rows=1,764, meetings=16, winsor_sigma=3.0
+counts: neutral=1724, happy=28, surprise=10, anxious=2
+
+[no FE] Model:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.427
+Model:                            OLS   Adj. R-squared:                  0.426
+Method:                 Least Squares   F-statistic:                     85.74
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):           3.80e-10
+Time:                        12:11:00   Log-Likelihood:                -4813.2
+No. Observations:                1764   AIC:                             9636.
+Df Residuals:                    1759   BIC:                             9664.
+Df Model:                           4                                         
+Covariance Type:              cluster                                         
+================================================================================
+                   coef    std err          z      P>|z|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept        0.0209      0.065      0.320      0.749      -0.107       0.149
+emo_happy        0.6244      0.469      1.331      0.183      -0.295       1.544
+emo_surprise    -0.0237      0.116     -0.204      0.838      -0.251       0.204
+emo_anxious     -0.0315      0.065     -0.489      0.625      -0.158       0.095
+pre_px_60       -0.3757      0.024    -15.695      0.000      -0.423      -0.329
+==============================================================================
+Omnibus:                     1263.693   Durbin-Watson:                   1.849
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           166206.370
+Skew:                          -2.476   Prob(JB):                         0.00
+Kurtosis:                      50.295   Cond. No.                         253.
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Joint test (all emotion β = 0): F(3,15)=0.912, p=0.4584
+Happy = Anxious: F(1,15)=1.989, p=0.1789
+Surprise = Anxious: F(1,15)=0.012, p=0.9158
+Happy = Surprise: F(1,15)=1.769, p=0.2034
+
+[with meeting FE] Model:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.430
+Model:                            OLS   Adj. R-squared:                  0.424
+Method:                 Least Squares   F-statistic:                     1.358
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):              0.295
+Time:                        12:11:00   Log-Likelihood:                -4808.6
+No. Observations:                1764   AIC:                             9657.
+Df Residuals:                    1744   BIC:                             9767.
+Df Model:                          19                                         
+Covariance Type:              cluster                                         
+===============================================================================================
+                                  coef    std err          z      P>|z|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------
+Intercept                      -0.0195      0.010     -1.859      0.063      -0.040       0.001
+C(meeting_id)[T.2021-11-03]     0.0222      0.010      2.119      0.034       0.002       0.043
+C(meeting_id)[T.2022-07-27]     0.0140      0.000     31.059      0.000       0.013       0.015
+C(meeting_id)[T.2022-11-02]    -0.0146      0.004     -3.561      0.000      -0.023      -0.007
+C(meeting_id)[T.2023-03-22]     0.0011      0.003      0.346      0.729      -0.005       0.007
+C(meeting_id)[T.2023-06-14]     1.0200      0.016     62.821      0.000       0.988       1.052
+C(meeting_id)[T.2023-11-01]     0.1111      0.007     15.251      0.000       0.097       0.125
+C(meeting_id)[T.2023-12-13]     0.1474      0.025      5.782      0.000       0.097       0.197
+C(meeting_id)[T.2024-03-20]     0.0003      0.006      0.055      0.956      -0.011       0.012
+C(meeting_id)[T.2024-06-12]     0.4715      0.018     26.101      0.000       0.436       0.507
+C(meeting_id)[T.2024-09-18]    -0.4148      0.042     -9.819      0.000      -0.498      -0.332
+C(meeting_id)[T.2024-11-07]    -0.1904      0.013    -14.915      0.000      -0.215      -0.165
+C(meeting_id)[T.2024-12-18]    -0.0318      0.053     -0.600      0.548      -0.136       0.072
+C(meeting_id)[T.2025-01-29]     0.0139      0.002      6.176      0.000       0.010       0.018
+C(meeting_id)[T.2025-03-19]    -0.1093      0.031     -3.545      0.000      -0.170      -0.049
+C(meeting_id)[T.2025-05-07]     0.2389      0.016     14.914      0.000       0.207       0.270
+emo_happy                       0.7142      0.470      1.518      0.129      -0.208       1.636
+emo_surprise                    0.1833      0.193      0.951      0.341      -0.194       0.561
+emo_anxious                     0.0929      0.071      1.311      0.190      -0.046       0.232
+pre_px_60                      -0.3763      0.024    -15.508      0.000      -0.424      -0.329
+==============================================================================
+Omnibus:                     1252.652   Durbin-Watson:                   1.858
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           163061.965
+Skew:                          -2.442   Prob(JB):                         0.00
+Kurtosis:                      49.847   Cond. No.                         254.
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Joint test (all emotion β = 0): F(3,15)=1.601, p=0.2309
+Happy = Anxious: F(1,15)=1.706, p=0.2112
+Surprise = Anxious: F(1,15)=0.200, p=0.6609
+Happy = Surprise: F(1,15)=1.091, p=0.3128
+
+=== ZT (60s) ===
+rows=1,764, meetings=16, winsor_sigma=3.0
+counts: neutral=1724, happy=28, surprise=10, anxious=2
+
+[no FE] Model:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.340
+Model:                            OLS   Adj. R-squared:                  0.338
+Method:                 Least Squares   F-statistic:                     8.064
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):            0.00112
+Time:                        12:11:00   Log-Likelihood:                -3933.2
+No. Observations:                1764   AIC:                             7876.
+Df Residuals:                    1759   BIC:                             7904.
+Df Model:                           4                                         
+Covariance Type:              cluster                                         
+================================================================================
+                   coef    std err          z      P>|z|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept       -0.0987      0.097     -1.016      0.310      -0.289       0.092
+emo_happy        0.1023      0.097      1.056      0.291      -0.088       0.292
+emo_surprise     0.0991      0.097      1.020      0.308      -0.091       0.290
+emo_anxious      0.0972      0.097      1.000      0.317      -0.093       0.288
+pre_px_60       -0.2172      0.040     -5.469      0.000      -0.295      -0.139
+==============================================================================
+Omnibus:                     2763.929   Durbin-Watson:                   1.860
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):          1677013.972
+Skew:                          -9.606   Prob(JB):                         0.00
+Kurtosis:                     152.825   Cond. No.                         221.
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Joint test (all emotion β = 0): F(3,15)=1.590, p=0.2336
+Happy = Anxious: F(1,15)=2.352, p=0.1460
+Surprise = Anxious: F(1,15)=0.351, p=0.5625
+Happy = Surprise: F(1,15)=0.422, p=0.5256
+
+[with meeting FE] Model:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              d_px_60_w   R-squared:                       0.354
+Model:                            OLS   Adj. R-squared:                  0.347
+Method:                 Least Squares   F-statistic:                     81.22
+Date:                Fri, 22 Aug 2025   Prob (F-statistic):           5.60e-10
+Time:                        12:11:00   Log-Likelihood:                -3913.9
+No. Observations:                1764   AIC:                             7868.
+Df Residuals:                    1744   BIC:                             7977.
+Df Model:                          19                                         
+Covariance Type:              cluster                                         
+===============================================================================================
+                                  coef    std err          z      P>|z|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------
+Intercept                      -1.2184      0.063    -19.283      0.000      -1.342      -1.095
+C(meeting_id)[T.2021-11-03]     1.2194      0.063     19.333      0.000       1.096       1.343
+C(meeting_id)[T.2022-07-27]     1.2192      0.063     19.416      0.000       1.096       1.342
+C(meeting_id)[T.2022-11-02]     1.2111      0.063     19.327      0.000       1.088       1.334
+C(meeting_id)[T.2023-03-22]     1.2209      0.063     19.369      0.000       1.097       1.344
+C(meeting_id)[T.2023-06-14]     1.2210      0.063     19.298      0.000       1.097       1.345
+C(meeting_id)[T.2023-11-01]     1.0080      0.047     21.631      0.000       0.917       1.099
+C(meeting_id)[T.2023-12-13]     1.2219      0.063     19.377      0.000       1.098       1.346
+C(meeting_id)[T.2024-03-20]     1.2142      0.063     19.413      0.000       1.092       1.337
+C(meeting_id)[T.2024-06-12]     1.2152      0.063     19.256      0.000       1.092       1.339
+C(meeting_id)[T.2024-09-18]     1.2113      0.063     19.358      0.000       1.089       1.334
+C(meeting_id)[T.2024-11-07]     1.4221      0.099     14.306      0.000       1.227       1.617
+C(meeting_id)[T.2024-12-18]     1.2133      0.063     19.347      0.000       1.090       1.336
+C(meeting_id)[T.2025-01-29]     1.2166      0.063     19.366      0.000       1.093       1.340
+C(meeting_id)[T.2025-03-19]     1.2205      0.063     19.301      0.000       1.097       1.344
+C(meeting_id)[T.2025-05-07]     1.2155      0.063     19.325      0.000       1.092       1.339
+emo_happy                       0.1370      0.133      1.034      0.301      -0.123       0.397
+emo_surprise                    0.0044      0.004      1.040      0.298      -0.004       0.013
+emo_anxious                    -0.1038      0.071     -1.472      0.141      -0.242       0.034
+pre_px_60                      -0.2204      0.040     -5.569      0.000      -0.298      -0.143
+==============================================================================
+Omnibus:                     2643.083   Durbin-Watson:                   1.900
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):          1493249.738
+Skew:                          -8.768   Prob(JB):                         0.00
+Kurtosis:                     144.453   Cond. No.                         222.
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+Joint test (all emotion β = 0): F(3,15)=1.424, p=0.2749
+Happy = Anxious: F(1,15)=3.024, p=0.1025
+Surprise = Anxious: F(1,15)=2.373, p=0.1443
+Happy = Surprise: F(1,15)=1.036, p=0.3250
